@@ -49,7 +49,7 @@ html {
 
 body {
   font-family: var(--font-body);
-  background: var(--cream-dark);
+  background: var(--cream);
   color: var(--charcoal);
   overflow-x: hidden;
   min-height: 100vh;
@@ -86,7 +86,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: 0;
+  z-index: 4;
   overflow: hidden;
 }
 
@@ -350,7 +350,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 /* ── 8. Save the Date ──────────────────────────────────────── */
 .save-date-section {
   padding: var(--section-pad) 1.5rem;
-  background: transparent;
+  background: var(--cream);
   text-align: center;
 }
 .save-date-inner {
@@ -459,7 +459,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 /* ── 10. Story Timeline ────────────────────────────────────── */
 .story-section {
   padding: var(--section-pad) 1.5rem;
-  background: transparent;
+  background: var(--cream-dark);
   overflow: hidden;
   position: relative;
 }
@@ -565,7 +565,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 /* ── 11. Event Details ─────────────────────────────────────── */
 .details-section {
   padding: var(--section-pad) 1.5rem;
-  background: transparent;
+  background: var(--cream);
 }
 .details-grid {
   display: grid;
@@ -762,7 +762,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 /* ── 12. Gallery ───────────────────────────────────────────── */
 .gallery-section {
   padding: var(--section-pad) 1.5rem;
-  background: transparent;
+  background: var(--cream-dark);
 }
 .gallery-grid {
   display: grid;
@@ -843,59 +843,53 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   color: rgba(255, 255, 255, 0.85);
 }
 
-/* ── Gift Single Card ────────────────────────── */
+/* ── Gift Single Card (Glassmorphic) ─────────── */
 .gift-single {
-  max-width: 480px;
+  max-width: 520px;
   margin: clamp(2.5rem, 5vw, 4rem) auto 0;
-  background: var(--white);
-  border-radius: 20px;
-  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 16px;
+  padding: 3rem 2.5rem;
   text-align: center;
-  border: 1px solid rgba(74,181,176,0.2);
-  box-shadow: 0 8px 40px rgba(26,58,74,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
   position: relative;
   overflow: hidden;
 }
-.gift-single::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--gold), var(--sage), var(--mauve));
-}
-.gift-single-icon { font-size: 3rem; display: block; margin-bottom: 0.75rem; }
 .gift-single-title {
   font-family: var(--font-serif);
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: var(--charcoal);
-  margin-bottom: 0.4rem;
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--white);
+  margin-bottom: 0.8rem;
+  letter-spacing: 0.02em;
 }
 .gift-single-label {
   display: block;
-  font-family: var(--font-display);
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--charcoal-mid);
-  margin-bottom: 1.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
 }
 .account-copy-row {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
-  background: rgba(74,181,176,0.08);
-  border: 1.5px solid rgba(74,181,176,0.3);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 12px;
   padding: 0.9rem 1.2rem;
 }
 .account-number-display {
   font-family: 'Courier New', monospace;
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  color: var(--charcoal);
-  letter-spacing: 0.06em;
+  color: var(--white);
+  letter-spacing: 0.08em;
   flex: 1;
   text-align: center;
   user-select: all;

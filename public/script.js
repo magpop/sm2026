@@ -93,6 +93,12 @@ let GUEST_TIER = null;
   els.forEach(el => observer.observe(el));
 })();
 
+// Prevent browser from remembering scroll position on reload
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 // ─────────────────────────────────────────────────────────────
 // 3. COUNTDOWN TIMER
 // ─────────────────────────────────────────────────────────────
@@ -108,11 +114,11 @@ let GUEST_TIER = null;
   function tick() {
     const diff = CONFIG.weddingDate.getTime() - Date.now();
     if (diff <= 0) {
-      cdDays.textContent = '000';
+      cdDays.textContent = '00';
       cdHours.textContent = cdMinutes.textContent = cdSeconds.textContent = '00';
       return;
     }
-    cdDays.textContent    = pad(Math.floor(diff / 86400000), 3);
+    cdDays.textContent    = pad(Math.floor(diff / 86400000), 2);
     cdHours.textContent   = pad(Math.floor((diff % 86400000) / 3600000));
     cdMinutes.textContent = pad(Math.floor((diff % 3600000) / 60000));
     cdSeconds.textContent = pad(Math.floor((diff % 60000) / 1000));
@@ -167,11 +173,10 @@ let GUEST_TIER = null;
 
   btn.addEventListener('click', toggle);
 
-  // Auto-play on scroll or user interaction
+  // Auto-play on first touch or user interaction
   const tryAuto = () => { if (!playing) toggle(); };
   document.addEventListener('click', tryAuto, { once: true });
   document.addEventListener('touchstart', tryAuto, { once: true });
-  document.addEventListener('scroll', tryAuto, { once: true, passive: true });
 })();
 
 // ─────────────────────────────────────────────────────────────
