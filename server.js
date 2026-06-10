@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3000;
 // ============================================================
 // CONFIGURATION — edit these values
 // ============================================================
-const ADMIN_PASSWORD = 'wedding2026'; // Change this!
+const ADMIN_PASSWORD = 'sm'; // Change this!
 const RSVP_FILE = path.join(__dirname, 'rsvps.json');
 // ============================================================
 
@@ -36,7 +36,7 @@ function writeRsvps(data) {
 // ─── POST /api/rsvp ─────────────────────────────────────────
 // Submit a new RSVP
 app.post('/api/rsvp', (req, res) => {
-  const { name, attending, guestCount, guestNames, message } = req.body;
+  const { name, attending, guestCount, message } = req.body;
 
   if (!name || typeof name !== 'string' || name.trim().length < 2) {
     return res.status(400).json({ error: 'Please provide a valid name.' });
@@ -57,7 +57,6 @@ app.post('/api/rsvp', (req, res) => {
     name: name.trim(),
     attending,
     guestCount: attending ? Math.max(1, parseInt(guestCount) || 1) : 0,
-    guestNames: guestNames ? guestNames.trim() : '',
     message: message ? message.trim() : '',
     timestamp: new Date().toISOString(),
     updated: !!existing,

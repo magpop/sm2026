@@ -247,8 +247,6 @@
           loading="lazy" /></div>
       <div class="gallery-item reveal-up" style="--delay:0.1s"><img src="gallery2.jpg" alt="Safi &amp; Maribelle"
           loading="lazy" /></div>
-      <div class="gallery-item reveal-up" style="--delay:0.2s"><img src="gallery3.jpg" alt="Safi &amp; Maribelle"
-          loading="lazy" /></div>
       <div class="gallery-item reveal-up" style="--delay:0.3s"><img src="gallery4.jpg" alt="Safi &amp; Maribelle"
           loading="lazy" /></div>
       <div class="gallery-item reveal-up" style="--delay:0.4s"><img src="gallery5.jpg" alt="Safi &amp; Maribelle"
@@ -256,8 +254,6 @@
       <div class="gallery-item reveal-up" style="--delay:0.5s"><img src="gallery6.jpg" alt="Safi &amp; Maribelle"
           loading="lazy" /></div>
     </div>
-    <p class="gallery-hint reveal-fade">✦ Add your own photos by replacing gallery1.jpg – gallery6.jpg in the public
-      folder ✦</p>
   </section>
 
   <!-- ══════════════════════════════════════════════ -->
@@ -302,11 +298,26 @@
       </div>
 
       <form id="rsvp-form" class="rsvp-form reveal-up" novalidate>
-        <!-- Name -->
-        <div class="form-group">
-          <label for="rsvp-name" class="form-label">Full Name *</label>
-          <input type="text" id="rsvp-name" name="name" class="form-input" placeholder="Your full name"
-            autocomplete="name" required />
+        <!-- Guest Allocation — driven by URL ?guests=1|2|3|unlimited -->
+        <div class="form-group" id="guest-count-group">
+          <label class="form-label">Your Invitation</label>
+          <div class="guest-allocation" id="guest-allocation">
+            <span class="allocation-icon" aria-hidden="true">🎟</span>
+            <span id="allocation-text">Loading…</span>
+          </div>
+          <!-- Shown only when ?guests=unlimited -->
+          <div id="unlimited-input" class="number-input hidden">
+            <button type="button" id="guests-minus" class="num-btn" aria-label="Decrease">−</button>
+            <input type="number" id="rsvp-guests" name="guestCount" class="form-input num-field" value="1" min="1"
+              max="30" readonly />
+            <button type="button" id="guests-plus" class="num-btn" aria-label="Increase">+</button>
+          </div>
+          <input type="hidden" id="rsvp-guests-hidden" name="guestCount" value="1" />
+        </div>
+
+        <!-- Dynamic Guest Inputs -->
+        <div id="dynamic-guest-inputs">
+          <!-- Injected by JS -->
         </div>
 
         <!-- Attending Toggle -->
@@ -325,30 +336,7 @@
           <input type="hidden" id="attending-value" name="attending" value="true" />
         </div>
 
-        <!-- Guest Allocation — driven by URL ?guests=1|2|3|unlimited -->
-        <div class="form-group" id="guest-count-group">
-          <label class="form-label">Your Invitation</label>
-          <div class="guest-allocation" id="guest-allocation">
-            <span class="allocation-icon" aria-hidden="true">🎟</span>
-            <span id="allocation-text">Loading…</span>
-          </div>
-          <!-- Shown only when ?guests=unlimited -->
-          <div id="unlimited-input" class="number-input hidden">
-            <button type="button" id="guests-minus" class="num-btn" aria-label="Decrease">−</button>
-            <input type="number" id="rsvp-guests" name="guestCount" class="form-input num-field" value="1" min="1"
-              max="30" readonly />
-            <button type="button" id="guests-plus" class="num-btn" aria-label="Increase">+</button>
-          </div>
-          <input type="hidden" id="rsvp-guests-hidden" name="guestCount" value="1" />
-        </div>
 
-        <!-- Additional Guests -->
-        <div class="form-group" id="guest-names-group">
-          <label for="rsvp-guest-names" class="form-label">Names of accompanying guests <span class="form-optional">(if
-              any)</span></label>
-          <textarea id="rsvp-guest-names" name="guestNames" class="form-input form-textarea"
-            placeholder="E.g., John Doe, Jane Smith" rows="2"></textarea>
-        </div>
 
         <!-- Message -->
         <div class="form-group">

@@ -44,7 +44,7 @@ let GUEST_TIER = null;
     el.className = 'petal';
     const size   = 6 + Math.random() * 10;
     const left   = Math.random() * 100;
-    const dur    = 8 + Math.random() * 10;
+    const dur    = 15 + Math.random() * 15;
     const delay  = Math.random() * 6;
     const color  = PETAL_COLORS[Math.floor(Math.random() * PETAL_COLORS.length)];
     const shape  = SHAPES[Math.floor(Math.random() * SHAPES.length)];
@@ -66,10 +66,10 @@ let GUEST_TIER = null;
   }
 
   // Stagger initial spawn
-  for (let i = 0; i < 25; i++) {
-    setTimeout(spawnPetal, i * 350);
+  for (let i = 0; i < 10; i++) {
+    setTimeout(spawnPetal, i * 500);
   }
-  setInterval(spawnPetal, 700);
+  setInterval(spawnPetal, 1800);
 })();
 
 // ─────────────────────────────────────────────────────────────
@@ -234,7 +234,33 @@ function legacyCopy(text) {
 }
 
 // ─────────────────────────────────────────────────────────────
-// 7. GUEST TIER  —  read from ?guests=1|2|3|unlimited
+// 7. GUEST INPUTS RENDERER
+// ─────────────────────────────────────────────────────────────
+function updateGuestInputs(count) {
+  const container = document.getElementById('dynamic-guest-inputs');
+  if (!container) return;
+  const current = container.querySelectorAll('.extra-guest-input').length;
+  const isDeclining = document.getElementById('rsvp-form')?.classList.contains('declining');
+  
+  if (count > current) {
+    for (let i = current + 1; i <= count; i++) {
+      const div = document.createElement('div');
+      div.className = 'form-group extra-guest-input';
+      div.innerHTML = `
+        <label for="rsvp-guest-${i}" class="form-label">Guest ${i} Name *</label>
+        <input type="text" id="rsvp-guest-${i}" class="form-input guest-name-field" placeholder="Full name" ${i === 1 ? 'autocomplete="name"' : ''} ${(isDeclining && i > 1) ? '' : 'required'} />
+      `;
+      container.appendChild(div);
+    }
+  } else if (count < current) {
+    for (let i = current; i > count; i--) {
+      if (container.lastElementChild) container.lastElementChild.remove();
+    }
+  }
+}
+
+// ─────────────────────────────────────────────────────────────
+// 8. GUEST TIER  —  read from ?guests=1|2|3|unlimited
 // ─────────────────────────────────────────────────────────────
 // Generate invitation links:
 //   /           → ?guests=1    (1 person)
@@ -254,25 +280,29 @@ function legacyCopy(text) {
     GUEST_TIER = 1;
     textEl.textContent = 'Your invitation is reserved for 1 guest';
     if (hiddenEl) hiddenEl.value = '1';
+    updateGuestInputs(1);
   } else if (tier === '2') {
     GUEST_TIER = 2;
     textEl.textContent = 'Your invitation is reserved for up to 2 guests';
     if (hiddenEl) hiddenEl.value = '2';
+    updateGuestInputs(2);
   } else if (tier === '3') {
     GUEST_TIER = 3;
     textEl.textContent = 'Your invitation is reserved for up to 3 guests';
     if (hiddenEl) hiddenEl.value = '3';
+    updateGuestInputs(3);
   } else {
     // unlimited or no param
     GUEST_TIER = null;
     textEl.textContent = 'How many guests will be joining you?';
     if (unlimEl) unlimEl.classList.remove('hidden');
     if (hiddenEl) hiddenEl.value = '1';
+    updateGuestInputs(1);
   }
 })();
 
 // ─────────────────────────────────────────────────────────────
-// 8. RSVP FORM
+// 9. RSVP FORM
 // ─────────────────────────────────────────────────────────────
 (function initRsvp() {
   const form          = document.getElementById('rsvp-form');
@@ -302,11 +332,15 @@ function legacyCopy(text) {
       btnYes.setAttribute('aria-pressed', 'true');
       btnNo.setAttribute('aria-pressed', 'false');
       if (guestGroup) guestGroup.style.display = '';
+      if (form) form.classList.remove('declining');
+      document.querySelectorAll('.extra-guest-input:not(:first-child) input').forEach(input => input.required = true);
     } else {
       btnNo.classList.add('active');     btnYes.classList.remove('active');
       btnNo.setAttribute('aria-pressed', 'true');
       btnYes.setAttribute('aria-pressed', 'false');
       if (guestGroup) guestGroup.style.display = 'none';
+      if (form) form.classList.add('declining');
+      document.querySelectorAll('.extra-guest-input:not(:first-child) input').forEach(input => input.required = false);
     }
   }
 
@@ -319,6 +353,7 @@ function legacyCopy(text) {
     const next = Math.min(30, Math.max(1, (parseInt(guestInput.value) || 1) + delta));
     guestInput.value = next;
     if (hiddenGuest) hiddenGuest.value = next;
+    updateGuestInputs(next);
   }
   if (minusBtn) minusBtn.addEventListener('click', () => updateGuests(-1));
   if (plusBtn)  plusBtn.addEventListener('click',  () => updateGuests(+1));
@@ -346,22 +381,26 @@ function legacyCopy(text) {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const name = document.getElementById('rsvp-name').value.trim();
+    const nameInputs = document.querySelectorAll('.guest-name-field');
+    let name = '';
+    if (isAttending) {
+      name = Array.from(nameInputs).map(el => el.value.trim()).filter(v => v.length > 0).join(' & ');
+    } else {
+      name = nameInputs[0] ? nameInputs[0].value.trim() : '';
+    }
+
     if (!name || name.length < 2) {
-      showResponse('Please enter your full name.', 'error');
-      document.getElementById('rsvp-name').focus();
+      showResponse('Please enter guest name(s).', 'error');
       return;
     }
 
     setLoading(true);
     responseDiv.classList.add('hidden');
 
-    const guestNamesEl = document.getElementById('rsvp-guest-names');
     const payload = {
       name,
       attending:  isAttending,
       guestCount: getGuestCount(),
-      guestNames: guestNamesEl ? guestNamesEl.value.trim() : '',
       message:    document.getElementById('rsvp-message').value.trim(),
     };
 
