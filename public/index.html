@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You're Invited 💍 | A Wedding Celebration</title>
+  <meta name="description" content="Join us to celebrate our special day. RSVP and let us know you'll be there." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!--  MUSIC TOGGLE                                  -->
+  <!-- ══════════════════════════════════════════════ -->
+  <button id="music-toggle" class="music-btn" aria-label="Toggle music" title="Toggle background music">
+    <span class="music-icon">♪</span>
+    <span class="music-label">Music</span>
+  </button>
+
+  <!-- Background audio — add your .mp3 file to public/ and update the src -->
+  <audio id="bg-music" loop preload="auto">
+    <source src="music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!--  FLOATING PETALS CONTAINER                     -->
+  <!-- ══════════════════════════════════════════════ -->
+  <div id="petals-container" aria-hidden="true"></div>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!--  HERO SECTION                                  -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="hero" class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <p class="hero-pre reveal-fade">— Together with their families —</p>
+      <h1 class="couple-names reveal-fade">
+        <span class="name-bride">Sophia</span>
+        <span class="name-amp">&amp;</span>
+        <span class="name-groom">Alexander</span>
+      </h1>
+      <div class="hero-date reveal-fade">
+        <span class="date-line"></span>
+        <span class="date-text">October 18, 2026</span>
+        <span class="date-line"></span>
+      </div>
+      <p class="hero-location reveal-fade">The Grand Garden Estate · Montréal, QC</p>
+      <a href="#rsvp" class="hero-cta reveal-fade" id="hero-cta-btn">
+        <span>RSVP Now</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>
+      </a>
+    </div>
+    <div class="scroll-indicator" aria-hidden="true">
+      <div class="scroll-mouse">
+        <div class="scroll-dot"></div>
+      </div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!--  SAVE THE DATE BANNER                          -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="save-date" class="save-date-section">
+    <div class="save-date-inner reveal-up">
+      <div class="floral-line" aria-hidden="true"></div>
+      <p class="section-pre">Save the Date</p>
+      <h2 class="section-title">October 18, 2026</h2>
+      <p class="save-date-sub">We are overjoyed to invite you to share in our celebration of love and commitment.</p>
+      <div class="floral-line" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!--  COUNTDOWN TIMER                               -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="countdown" class="countdown-section">
+    <div class="countdown-bg" aria-hidden="true"></div>
+    <div class="countdown-content">
+      <p class="section-pre light reveal-fade">Counting Down To Our Big Day</p>
+      <div class="countdown-grid">
+        <div class="countdown-item reveal-up" style="--delay:0s">
+          <span class="countdown-num" id="cd-days">000</span>
+          <span class="countdown-label">Days</span>
+        </div>
+        <div class="countdown-sep reveal-up" style="--delay:0.1s">:</div>
+        <div class="countdown-item reveal-up" style="--delay:0.2s">
+          <span class="countdown-num" id="cd-hours">00</span>
+          <span class="countdown-label">Hours</span>
+        </div>
+        <div class="countdown-sep reveal-up" style="--delay:0.3s">:</div>
+        <div class="countdown-item reveal-up" style="--delay:0.4s">
+          <span class="countdown-num" id="cd-minutes">00</span>
+          <span class="countdown-label">Minutes</span>
+        </div>
+        <div class="countdown-sep reveal-up" style="--delay:0.5s">:</div>
+        <div class="countdown-item reveal-up" style="--delay:0.6s">
+          <span class="countdown-num" id="cd-seconds">00</span>
+          <span class="countdown-label">Seconds</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!--  OUR STORY TIMELINE                            -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="story" class="story-section">
+    <div class="section-header reveal-up">
+      <p class="section-pre">How It All Began</p>
+      <h2 class="section-title">Our Story</h2>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-line" aria-hidden="true"></div>
+
+      <div class="timeline-item left reveal-left">
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="timeline-card">
+          <span class="timeline-year">2020</span>
+          <h3 class="timeline-heading">First Meeting</h3>
+          <p class="timeline-text">A chance encounter at a mutual friend's gathering turned into a conversation that lasted until sunrise. Neither of us wanted it to end.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item right reveal-right">
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="timeline-card">
+          <span class="timeline-year">2021</span>
+          <h3 class="timeline-heading">First Date</h3>
+          <p class="timeline-text">A walk through the botanical garden on a crisp autumn afternoon. We talked, laughed, and knew this was the beginning of something beautiful.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item left reveal-left">
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="timeline-card">
+          <span class="timeline-year">2023</span>
+          <h3 class="timeline-heading">Adventures Together</h3>
+          <p class="timeline-text">From the streets of Paris to the beaches of Santorini, every journey became a chapter in our love story.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item right reveal-right">
+        <div class="timeline-dot" aria-hidden="true"></div>
+        <div class="timeline-card">
+          <span class="timeline-year">2025</span>
+          <h3 class="timeline-heading">The Proposal</h3>
+          <p class="timeline-text">Under a canopy of stars on a rooftop in Montréal, with a ring that had been hidden for months — the answer was an immediate, tearful yes.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item left reveal-left">
+        <div class="timeline-dot timeline-dot-final" aria-hidden="true"></div>
+        <div class="timeline-card timeline-card-final">
+          <span class="timeline-year">2026</span>
+          <h3 class="timeline-heading">Forever Begins</h3>
+          <p class="timeline-text">And now we invite you, our dearest family and friends, to celebrate the next chapter with us.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!--  EVENT DETAILS                                 -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="details" class="details-section">
+    <div class="section-header reveal-up">
+      <p class="section-pre">Join Us</p>
+      <h2 class="section-title">Event Details</h2>
+    </div>
+
+    <div class="details-grid">
+      <!-- Ceremony Card -->
+      <div class="detail-card reveal-left">
+        <div class="detail-card-icon" aria-hidden="true">💍</div>
+        <h3 class="detail-card-title">The Ceremony</h3>
+        <div class="detail-card-divider" aria-hidden="true"></div>
+        <div class="detail-item">
+          <span class="detail-label">Date</span>
+          <span class="detail-value">Sunday, October 18, 2026</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Time</span>
+          <span class="detail-value">4:00 PM</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Venue</span>
+          <span class="detail-value">The Grand Garden Chapel</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Address</span>
+          <span class="detail-value">1200 Chemin du Moulin<br>Montréal, QC H3T 1J4</span>
+        </div>
+        <a href="https://maps.google.com" target="_blank" rel="noopener" class="detail-map-btn" id="ceremony-map-btn">
+          📍 View on Map
+        </a>
+      </div>
+
+      <!-- Reception Card -->
+      <div class="detail-card reveal-right">
+        <div class="detail-card-icon" aria-hidden="true">🥂</div>
+        <h3 class="detail-card-title">The Reception</h3>
+        <div class="detail-card-divider" aria-hidden="true"></div>
+        <div class="detail-item">
+          <span class="detail-label">Date</span>
+          <span class="detail-value">Sunday, October 18, 2026</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Time</span>
+          <span class="detail-value">7:00 PM — Midnight</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Venue</span>
+          <span class="detail-value">The Rosewood Ballroom</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Address</span>
+          <span class="detail-value">45 Avenue des Pins Ouest<br>Montréal, QC H2W 1R2</span>
+        </div>
+        <a href="https://maps.google.com" target="_blank" rel="noopener" class="detail-map-btn" id="reception-map-btn">
+          📍 View on Map
+        </a>
+      </div>
+    </div>
+
+    <!-- Dress Code -->
+    <div class="dress-code reveal-up">
+      <div class="dress-code-inner">
+        <span class="dress-code-icon" aria-hidden="true">👗</span>
+        <div>
+          <h3 class="dress-code-title">Dress Code</h3>
+          <p class="dress-code-text">Black Tie Preferred &nbsp;·&nbsp; Please avoid white, ivory, and champagne</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!--  GALLERY                                       -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="gallery" class="gallery-section">
+    <div class="section-header reveal-up">
+      <p class="section-pre">Memories</p>
+      <h2 class="section-title">Our Gallery</h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item reveal-up" style="--delay:0s"><img src="gallery1.jpg" alt="Couple photo 1" onerror="this.parentElement.style.background='linear-gradient(135deg,#f5e6e8,#d4a8b5)';this.style.display='none'" /></div>
+      <div class="gallery-item reveal-up" style="--delay:0.1s"><img src="gallery2.jpg" alt="Couple photo 2" onerror="this.parentElement.style.background='linear-gradient(135deg,#e8f0e8,#a8c5a0)';this.style.display='none'" /></div>
+      <div class="gallery-item reveal-up" style="--delay:0.2s"><img src="gallery3.jpg" alt="Couple photo 3" onerror="this.parentElement.style.background='linear-gradient(135deg,#f5f0e8,#d4c4a0)';this.style.display='none'" /></div>
+      <div class="gallery-item reveal-up" style="--delay:0.3s"><img src="gallery4.jpg" alt="Couple photo 4" onerror="this.parentElement.style.background='linear-gradient(135deg,#e8e8f5,#a0a8d4)';this.style.display='none'" /></div>
+      <div class="gallery-item reveal-up" style="--delay:0.4s"><img src="gallery5.jpg" alt="Couple photo 5" onerror="this.parentElement.style.background='linear-gradient(135deg,#f5e8f0,#d4a0c4)';this.style.display='none'" /></div>
+      <div class="gallery-item reveal-up" style="--delay:0.5s"><img src="gallery6.jpg" alt="Couple photo 6" onerror="this.parentElement.style.background='linear-gradient(135deg,#f0f5e8,#c4d4a0)';this.style.display='none'" /></div>
+    </div>
+    <p class="gallery-hint reveal-fade">✦ Add your own photos by replacing gallery1.jpg – gallery6.jpg in the public folder ✦</p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!--  RSVP SECTION                                  -->
+  <!-- ══════════════════════════════════════════════ -->
+  <section id="rsvp" class="rsvp-section">
+    <div class="rsvp-bg" aria-hidden="true"></div>
+    <div class="rsvp-container">
+      <div class="section-header reveal-up">
+        <p class="section-pre light">Kindly Respond By September 1, 2026</p>
+        <h2 class="section-title light">Will You Join Us?</h2>
+        <p class="rsvp-intro reveal-fade">Please let us know if you'll be celebrating with us on our special day.</p>
+      </div>
+
+      <form id="rsvp-form" class="rsvp-form reveal-up" novalidate>
+        <!-- Name -->
+        <div class="form-group">
+          <label for="rsvp-name" class="form-label">Full Name *</label>
+          <input type="text" id="rsvp-name" name="name" class="form-input" placeholder="Your full name" autocomplete="name" required />
+        </div>
+
+        <!-- Attending Toggle -->
+        <div class="form-group">
+          <label class="form-label">Will you be attending? *</label>
+          <div class="attend-toggle">
+            <button type="button" id="btn-attending" class="toggle-btn toggle-yes active" aria-pressed="true">
+              <span class="toggle-icon">✓</span>
+              <span>Joyfully Accept</span>
+            </button>
+            <button type="button" id="btn-not-attending" class="toggle-btn toggle-no" aria-pressed="false">
+              <span class="toggle-icon">✕</span>
+              <span>Regretfully Decline</span>
+            </button>
+          </div>
+          <input type="hidden" id="attending-value" name="attending" value="true" />
+        </div>
+
+        <!-- Guest Count (shown only if attending) -->
+        <div class="form-group" id="guest-count-group">
+          <label for="rsvp-guests" class="form-label">Number of Guests (including yourself)</label>
+          <div class="number-input">
+            <button type="button" id="guests-minus" class="num-btn" aria-label="Decrease">−</button>
+            <input type="number" id="rsvp-guests" name="guestCount" class="form-input num-field" value="1" min="1" max="10" readonly />
+            <button type="button" id="guests-plus" class="num-btn" aria-label="Increase">+</button>
+          </div>
+        </div>
+
+        <!-- Dietary Notes (shown only if attending) -->
+        <div class="form-group" id="dietary-group">
+          <label for="rsvp-dietary" class="form-label">Dietary Notes <span class="form-optional">(optional)</span></label>
+          <input type="text" id="rsvp-dietary" name="dietaryNotes" class="form-input" placeholder="e.g. Vegetarian, Nut allergy..." />
+        </div>
+
+        <!-- Message -->
+        <div class="form-group">
+          <label for="rsvp-message" class="form-label">Message for the Couple <span class="form-optional">(optional)</span></label>
+          <textarea id="rsvp-message" name="message" class="form-input form-textarea" placeholder="Share your wishes..." rows="3"></textarea>
+        </div>
+
+        <!-- Submit -->
+        <button type="submit" id="rsvp-submit" class="rsvp-submit-btn">
+          <span id="submit-text">Send My RSVP</span>
+          <span id="submit-loading" class="hidden">Sending…</span>
+        </button>
+
+        <!-- Response Message -->
+        <div id="rsvp-response" class="rsvp-response hidden" role="alert" aria-live="polite"></div>
+      </form>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════ -->
+  <!--  FOOTER                                        -->
+  <!-- ══════════════════════════════════════════════ -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-names">Sophia &amp; Alexander</p>
+      <p class="footer-date">October 18, 2026</p>
+      <div class="footer-divider" aria-hidden="true">♡</div>
+      <p class="footer-thank">Thank you for being part of our story.</p>
+      <nav class="footer-nav" aria-label="Page sections">
+        <a href="#hero" class="footer-link">Home</a>
+        <a href="#story" class="footer-link">Our Story</a>
+        <a href="#details" class="footer-link">Details</a>
+        <a href="#rsvp" class="footer-link">RSVP</a>
+      </nav>
+      <p class="footer-admin-hint">
+        <a href="/admin" class="footer-admin-link" id="admin-page-link">Admin</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
