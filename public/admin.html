@@ -427,7 +427,7 @@
             <th>Name</th>
             <th>Status</th>
             <th>Guests</th>
-            <th>Dietary Notes</th>
+            <th>Guest Names</th>
             <th>Message</th>
             <th>Date Submitted</th>
             <th>Action</th>
@@ -523,7 +523,7 @@
       filtered = filtered.filter(r =>
         r.name.toLowerCase().includes(q) ||
         (r.message || '').toLowerCase().includes(q) ||
-        (r.dietaryNotes || '').toLowerCase().includes(q)
+        (r.guestNames || '').toLowerCase().includes(q)
       );
     }
 
@@ -546,7 +546,7 @@
         <td><strong>${escHtml(r.name)}</strong>${r.updated ? ' <small style="color:rgba(255,255,255,0.3)">(updated)</small>' : ''}</td>
         <td>${badge}</td>
         <td style="text-align:center">${r.attending ? r.guestCount : '—'}</td>
-        <td class="td-note" title="${escHtml(r.dietaryNotes || '')}">${escHtml(r.dietaryNotes || '—')}</td>
+        <td class="td-note" title="${escHtml(r.guestNames || '')}">${escHtml(r.guestNames || '—')}</td>
         <td class="td-note" title="${escHtml(r.message || '')}">${escHtml(r.message || '—')}</td>
         <td class="td-date">${dt}</td>
         <td><button class="btn-delete" onclick="deleteRsvp('${r.id}', '${escHtml(r.name)}')">Delete</button></td>
@@ -590,12 +590,12 @@
 
   // ── Export CSV ─────────────────────────────────
   document.getElementById('btn-export').addEventListener('click', () => {
-    const header = ['Name', 'Status', 'Guests', 'Dietary Notes', 'Message', 'Date Submitted'];
+    const header = ['Name', 'Status', 'Guests', 'Guest Names', 'Message', 'Date Submitted'];
     const rows = allRsvps.map(r => [
       `"${r.name.replace(/"/g, '""')}"`,
       r.attending ? 'Attending' : 'Declining',
       r.attending ? r.guestCount : 0,
-      `"${(r.dietaryNotes || '').replace(/"/g, '""')}"`,
+      `"${(r.guestNames || '').replace(/"/g, '""')}"`,
       `"${(r.message || '').replace(/"/g, '""')}"`,
       new Date(r.timestamp).toLocaleString('en-CA'),
     ]);

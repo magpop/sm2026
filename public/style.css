@@ -49,10 +49,10 @@ html {
 
 body {
   font-family: var(--font-body);
-  background: var(--cream);
+  background: var(--cream-dark);
   color: var(--charcoal);
   overflow-x: hidden;
-  line-height: 1.7;
+  min-height: 100vh;
 }
 
 img { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -150,7 +150,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: var(--cream-dark);
+  background: transparent;
 }
 
 .hero-section::before {
@@ -350,7 +350,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 /* ── 8. Save the Date ──────────────────────────────────────── */
 .save-date-section {
   padding: var(--section-pad) 1.5rem;
-  background: var(--cream);
+  background: transparent;
   text-align: center;
 }
 .save-date-inner {
@@ -459,7 +459,8 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 /* ── 10. Story Timeline ────────────────────────────────────── */
 .story-section {
   padding: var(--section-pad) 1.5rem;
-  background: var(--cream-dark);
+  background: transparent;
+  overflow: hidden;
   position: relative;
 }
 .story-section::before {
@@ -564,7 +565,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 /* ── 11. Event Details ─────────────────────────────────────── */
 .details-section {
   padding: var(--section-pad) 1.5rem;
-  background: var(--cream);
+  background: transparent;
 }
 .details-grid {
   display: grid;
@@ -666,7 +667,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 /* ── Gift Section ─────────────────────────── */
 .gifts-section {
   padding: var(--section-pad) 1.5rem;
-  background: var(--cream);
+  background: transparent;
   position: relative;
 }
 .gifts-section::before {
@@ -761,7 +762,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 /* ── 12. Gallery ───────────────────────────────────────────── */
 .gallery-section {
   padding: var(--section-pad) 1.5rem;
-  background: var(--cream-dark);
+  background: transparent;
 }
 .gallery-grid {
   display: grid;
@@ -798,11 +799,137 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   opacity: 0.7;
 }
 
+/* ── Content sections: stacked above petals (z-index 2) ─── */
+.save-date-section,
+.countdown-section,
+.story-section,
+.details-section,
+.gallery-section,
+.gifts-section,
+.rsvp-section,
+.site-footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── Video Background for Gifts ───────────────── */
+.video-bg-section {
+  position: relative;
+  overflow: hidden;
+  padding: var(--section-pad) 1.5rem;
+}
+.section-video-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  opacity: 0.8;
+}
+.video-overlay-dark {
+  position: absolute;
+  inset: 0;
+  background: rgba(13, 30, 40, 0.45);
+  z-index: 1;
+}
+.gifts-container.relative-content {
+  position: relative;
+  z-index: 2;
+}
+.text-light {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* ── Gift Single Card ────────────────────────── */
+.gift-single {
+  max-width: 480px;
+  margin: clamp(2.5rem, 5vw, 4rem) auto 0;
+  background: var(--white);
+  border-radius: 20px;
+  padding: 2.5rem;
+  text-align: center;
+  border: 1px solid rgba(74,181,176,0.2);
+  box-shadow: 0 8px 40px rgba(26,58,74,0.08);
+  position: relative;
+  overflow: hidden;
+}
+.gift-single::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--gold), var(--sage), var(--mauve));
+}
+.gift-single-icon { font-size: 3rem; display: block; margin-bottom: 0.75rem; }
+.gift-single-title {
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 0.4rem;
+}
+.gift-single-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--charcoal-mid);
+  margin-bottom: 1.5rem;
+}
+.account-copy-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background: rgba(74,181,176,0.08);
+  border: 1.5px solid rgba(74,181,176,0.3);
+  border-radius: 12px;
+  padding: 0.9rem 1.2rem;
+}
+.account-number-display {
+  font-family: 'Courier New', monospace;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  letter-spacing: 0.06em;
+  flex: 1;
+  text-align: center;
+  user-select: all;
+}
+.copy-account-btn {
+  padding: 0.5rem 1.1rem;
+  background: linear-gradient(135deg, var(--mauve), var(--sage));
+  color: var(--white);
+  border-radius: 8px;
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  transition: all 0.25s var(--ease-out);
+  box-shadow: 0 2px 10px rgba(46,125,168,0.3);
+  cursor: pointer;
+}
+.copy-account-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(46,125,168,0.45); }
+.copy-account-btn.copied { background: linear-gradient(135deg, #3a9e5a, #2a8050); }
+.gift-copied-confirm {
+  margin-top: 0.75rem;
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: var(--sage);
+  font-style: italic;
+}
+
 /* ── 13. RSVP Section ──────────────────────────────────────── */
 .rsvp-section {
   position: relative;
   padding: var(--section-pad) 1.5rem;
   overflow: hidden;
+  background: transparent;
 }
 .rsvp-bg {
   position: absolute;
