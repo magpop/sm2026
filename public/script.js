@@ -4,8 +4,8 @@
    ============================================================ */
 
 const CONFIG = {
-  weddingDate:  new Date('2026-07-25T18:30:00'),  // Ceremony at 6:30 PM
-  coupleNames:  'Safi & Maribelle',
+  weddingDate: new Date('2026-07-25T18:30:00'),  // Ceremony at 6:30 PM
+  coupleNames: 'Safi & Maribelle',
   rsvpDeadline: 'July 1, 2026',
 };
 
@@ -21,11 +21,9 @@ let GUEST_TIER = null;
 
   // Soft pink rose petal colours
   const PETAL_COLORS = [
-    'rgba(255,182,193,0.70)',  // light pink
-    'rgba(255,153,176,0.60)',  // rose pink
-    'rgba(255,214,224,0.65)',  // blush
-    'rgba(255,192,203,0.70)',  // classic pink
-    'rgba(250,200,215,0.60)',  // dusty rose
+    'rgba(254, 211, 211, 0.85)',  // blush
+    'rgba(255, 200, 192, 0.76)',  // classic pink
+    'rgba(250, 210, 200, 0.6)',  // dusty rose
     'rgba(255,230,240,0.75)',  // very pale pink
     'rgba(255,255,255,0.50)',  // white foam petal
   ];
@@ -40,25 +38,25 @@ let GUEST_TIER = null;
   ];
 
   function spawnPetal() {
-    const el    = document.createElement('div');
+    const el = document.createElement('div');
     el.className = 'petal';
-    const size   = 6 + Math.random() * 10;
-    const left   = Math.random() * 100;
-    const dur    = 15 + Math.random() * 15;
-    const delay  = Math.random() * 6;
-    const color  = PETAL_COLORS[Math.floor(Math.random() * PETAL_COLORS.length)];
-    const shape  = SHAPES[Math.floor(Math.random() * SHAPES.length)];
-    const rot    = -15 + Math.random() * 30;
+    const size = 6 + Math.random() * 10;
+    const left = Math.random() * 100;
+    const dur = 15 + Math.random() * 15;
+    const delay = Math.random() * 6;
+    const color = PETAL_COLORS[Math.floor(Math.random() * PETAL_COLORS.length)];
+    const shape = SHAPES[Math.floor(Math.random() * SHAPES.length)];
+    const rot = -15 + Math.random() * 30;
 
     Object.assign(el.style, {
-      width:             size + 'px',
-      height:            (size * 1.45) + 'px',
-      left:              left + '%',
-      background:        color,
+      width: size + 'px',
+      height: (size * 1.45) + 'px',
+      left: left + '%',
+      background: color,
       animationDuration: dur + 's',
-      animationDelay:    delay + 's',
-      borderRadius:      shape,
-      transform:         `rotate(${rot}deg)`,
+      animationDelay: delay + 's',
+      borderRadius: shape,
+      transform: `rotate(${rot}deg)`,
     });
 
     container.appendChild(el);
@@ -103,8 +101,8 @@ window.scrollTo(0, 0);
 // 3. COUNTDOWN TIMER
 // ─────────────────────────────────────────────────────────────
 (function initCountdown() {
-  const cdDays    = document.getElementById('cd-days');
-  const cdHours   = document.getElementById('cd-hours');
+  const cdDays = document.getElementById('cd-days');
+  const cdHours = document.getElementById('cd-hours');
   const cdMinutes = document.getElementById('cd-minutes');
   const cdSeconds = document.getElementById('cd-seconds');
   if (!cdDays) return;
@@ -118,8 +116,8 @@ window.scrollTo(0, 0);
       cdHours.textContent = cdMinutes.textContent = cdSeconds.textContent = '00';
       return;
     }
-    cdDays.textContent    = pad(Math.floor(diff / 86400000), 2);
-    cdHours.textContent   = pad(Math.floor((diff % 86400000) / 3600000));
+    cdDays.textContent = pad(Math.floor(diff / 86400000), 2);
+    cdHours.textContent = pad(Math.floor((diff % 86400000) / 3600000));
     cdMinutes.textContent = pad(Math.floor((diff % 3600000) / 60000));
     cdSeconds.textContent = pad(Math.floor((diff % 60000) / 1000));
   }
@@ -132,8 +130,8 @@ window.scrollTo(0, 0);
 // ─────────────────────────────────────────────────────────────
 (function initMusic() {
   const audio = document.getElementById('bg-music');
-  const btn   = document.getElementById('music-toggle');
-  const icon  = btn ? btn.querySelector('.music-icon') : null;
+  const btn = document.getElementById('music-toggle');
+  const icon = btn ? btn.querySelector('.music-icon') : null;
   if (!audio || !btn) return;
 
   audio.volume = 0.35;
@@ -146,7 +144,7 @@ window.scrollTo(0, 0);
         if (audio.volume < 0.33) audio.volume = Math.min(0.35, audio.volume + 0.02);
         else clearInterval(iv);
       }, 80);
-    }).catch(() => {});
+    }).catch(() => { });
   }
 
   function fadeOut() {
@@ -187,8 +185,8 @@ window.scrollTo(0, 0);
 // 6. COPY ACCOUNT NUMBER (gift section)
 // ─────────────────────────────────────────────────────────────
 function copyAccount() {
-  const numEl   = document.getElementById('account-number');
-  const msgEl   = document.getElementById('gift-copied-msg');
+  const numEl = document.getElementById('account-number');
+  const msgEl = document.getElementById('gift-copied-msg');
   const copyBtn = document.getElementById('copy-account-btn');
   if (!numEl) return;
 
@@ -229,7 +227,7 @@ function legacyCopy(text) {
   ta.style.cssText = 'position:fixed;opacity:0;top:0;left:0;';
   document.body.appendChild(ta);
   ta.focus(); ta.select();
-  try { document.execCommand('copy'); } catch (_) {}
+  try { document.execCommand('copy'); } catch (_) { }
   document.body.removeChild(ta);
 }
 
@@ -241,7 +239,7 @@ function updateGuestInputs(count) {
   if (!container) return;
   const current = container.querySelectorAll('.extra-guest-input').length;
   const isDeclining = document.getElementById('rsvp-form')?.classList.contains('declining');
-  
+
   if (count > current) {
     for (let i = current + 1; i <= count; i++) {
       const div = document.createElement('div');
@@ -268,11 +266,11 @@ function updateGuestInputs(count) {
 //   /           → ?guests=3    (up to 3 people)
 //   /           → ?guests=unlimited  (open number — couple uses this)
 (function initGuestTier() {
-  const params    = new URLSearchParams(window.location.search);
-  const tier      = (params.get('guests') || '').toLowerCase().trim();
-  const textEl    = document.getElementById('allocation-text');
-  const unlimEl   = document.getElementById('unlimited-input');
-  const hiddenEl  = document.getElementById('rsvp-guests-hidden');
+  const params = new URLSearchParams(window.location.search);
+  const tier = (params.get('guests') || '').toLowerCase().trim();
+  const textEl = document.getElementById('allocation-text');
+  const unlimEl = document.getElementById('unlimited-input');
+  const hiddenEl = document.getElementById('rsvp-guests-hidden');
 
   if (!textEl) return;
 
@@ -305,19 +303,19 @@ function updateGuestInputs(count) {
 // 9. RSVP FORM
 // ─────────────────────────────────────────────────────────────
 (function initRsvp() {
-  const form          = document.getElementById('rsvp-form');
-  const btnYes        = document.getElementById('btn-attending');
-  const btnNo         = document.getElementById('btn-not-attending');
-  const attendingVal  = document.getElementById('attending-value');
-  const guestGroup    = document.getElementById('guest-count-group');
-  const guestInput    = document.getElementById('rsvp-guests');      // unlimited stepper
-  const hiddenGuest   = document.getElementById('rsvp-guests-hidden');
-  const minusBtn      = document.getElementById('guests-minus');
-  const plusBtn       = document.getElementById('guests-plus');
-  const submitBtn     = document.getElementById('rsvp-submit');
-  const submitText    = document.getElementById('submit-text');
+  const form = document.getElementById('rsvp-form');
+  const btnYes = document.getElementById('btn-attending');
+  const btnNo = document.getElementById('btn-not-attending');
+  const attendingVal = document.getElementById('attending-value');
+  const guestGroup = document.getElementById('guest-count-group');
+  const guestInput = document.getElementById('rsvp-guests');      // unlimited stepper
+  const hiddenGuest = document.getElementById('rsvp-guests-hidden');
+  const minusBtn = document.getElementById('guests-minus');
+  const plusBtn = document.getElementById('guests-plus');
+  const submitBtn = document.getElementById('rsvp-submit');
+  const submitText = document.getElementById('submit-text');
   const submitLoading = document.getElementById('submit-loading');
-  const responseDiv   = document.getElementById('rsvp-response');
+  const responseDiv = document.getElementById('rsvp-response');
 
   if (!form) return;
 
@@ -328,14 +326,14 @@ function updateGuestInputs(count) {
     isAttending = value;
     attendingVal.value = String(value);
     if (value) {
-      btnYes.classList.add('active');    btnNo.classList.remove('active');
+      btnYes.classList.add('active'); btnNo.classList.remove('active');
       btnYes.setAttribute('aria-pressed', 'true');
       btnNo.setAttribute('aria-pressed', 'false');
       if (guestGroup) guestGroup.style.display = '';
       if (form) form.classList.remove('declining');
       document.querySelectorAll('.extra-guest-input:not(:first-child) input').forEach(input => input.required = true);
     } else {
-      btnNo.classList.add('active');     btnYes.classList.remove('active');
+      btnNo.classList.add('active'); btnYes.classList.remove('active');
       btnNo.setAttribute('aria-pressed', 'true');
       btnYes.setAttribute('aria-pressed', 'false');
       if (guestGroup) guestGroup.style.display = 'none';
@@ -345,7 +343,7 @@ function updateGuestInputs(count) {
   }
 
   btnYes.addEventListener('click', () => setAttending(true));
-  btnNo.addEventListener('click',  () => setAttending(false));
+  btnNo.addEventListener('click', () => setAttending(false));
 
   // ── Guest count (unlimited tier only) ────────────────────
   function updateGuests(delta) {
@@ -356,7 +354,7 @@ function updateGuestInputs(count) {
     updateGuestInputs(next);
   }
   if (minusBtn) minusBtn.addEventListener('click', () => updateGuests(-1));
-  if (plusBtn)  plusBtn.addEventListener('click',  () => updateGuests(+1));
+  if (plusBtn) plusBtn.addEventListener('click', () => updateGuests(+1));
 
   function getGuestCount() {
     if (GUEST_TIER !== null) return GUEST_TIER;
@@ -366,7 +364,7 @@ function updateGuestInputs(count) {
   // ── UI helpers ────────────────────────────────────────────
   function showResponse(msg, type) {
     responseDiv.textContent = msg;
-    responseDiv.className   = `rsvp-response ${type}`;
+    responseDiv.className = `rsvp-response ${type}`;
     responseDiv.classList.remove('hidden');
     responseDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
@@ -399,16 +397,16 @@ function updateGuestInputs(count) {
 
     const payload = {
       name,
-      attending:  isAttending,
+      attending: isAttending,
       guestCount: getGuestCount(),
-      message:    document.getElementById('rsvp-message').value.trim(),
+      message: document.getElementById('rsvp-message').value.trim(),
     };
 
     try {
-      const res  = await fetch('/api/rsvp', {
-        method:  'POST',
+      const res = await fetch('/api/rsvp', {
+        method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body:    JSON.stringify(payload),
+        body: JSON.stringify(payload),
       });
       const data = await res.json();
 
@@ -416,8 +414,8 @@ function updateGuestInputs(count) {
         showResponse(
           isAttending
             ? (data.updated
-                ? `✓ We've updated your RSVP, ${name}! See you on July 25th! 🎉`
-                : `✓ Wonderful, ${name}! We can't wait to celebrate with you! 🎉`)
+              ? `✓ We've updated your RSVP, ${name}! See you on July 25th! 🎉`
+              : `✓ Wonderful, ${name}! We can't wait to celebrate with you! 🎉`)
             : `✓ Thank you for letting us know, ${name}. We'll miss you on our special day. 💕`,
           'success'
         );
