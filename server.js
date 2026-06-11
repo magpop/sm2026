@@ -10,8 +10,8 @@ const PORT = process.env.PORT || 3000;
 // ============================================================
 // CONFIGURATION — edit these values
 // ============================================================
-const ADMIN_PASSWORD = 'sm'; // Change this!
-const RSVP_FILE = path.join(__dirname, 'rsvps.json');
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'sm';
+const RSVP_FILE = path.join(process.env.RSVP_DATA_DIR || __dirname, 'rsvps.json');
 // ============================================================
 
 app.use(cors());
