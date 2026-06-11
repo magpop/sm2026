@@ -234,27 +234,16 @@ function legacyCopy(text) {
 // ─────────────────────────────────────────────────────────────
 // 7. GUEST INPUTS RENDERER
 // ─────────────────────────────────────────────────────────────
-function updateGuestInputs(count) {
+function updateGuestInputs() {
   const container = document.getElementById('dynamic-guest-inputs');
-  if (!container) return;
-  const current = container.querySelectorAll('.extra-guest-input').length;
-  const isDeclining = document.getElementById('rsvp-form')?.classList.contains('declining');
-
-  if (count > current) {
-    for (let i = current + 1; i <= count; i++) {
-      const div = document.createElement('div');
-      div.className = 'form-group extra-guest-input';
-      div.innerHTML = `
-        <label for="rsvp-guest-${i}" class="form-label">Guest ${i} Name *</label>
-        <input type="text" id="rsvp-guest-${i}" class="form-input guest-name-field" placeholder="Full name" ${i === 1 ? 'autocomplete="name"' : ''} ${(isDeclining && i > 1) ? '' : 'required'} />
-      `;
-      container.appendChild(div);
-    }
-  } else if (count < current) {
-    for (let i = current; i > count; i--) {
-      if (container.lastElementChild) container.lastElementChild.remove();
-    }
-  }
+  if (!container || container.querySelectorAll('.extra-guest-input').length > 0) return;
+  const div = document.createElement('div');
+  div.className = 'form-group extra-guest-input';
+  div.innerHTML = `
+    <label for="rsvp-guest-1" class="form-label">Guest Name *</label>
+    <input type="text" id="rsvp-guest-1" class="form-input guest-name-field" placeholder="Full name" autocomplete="name" required />
+  `;
+  container.appendChild(div);
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -278,24 +267,24 @@ function updateGuestInputs(count) {
     GUEST_TIER = 1;
     textEl.textContent = 'Your invitation is reserved for 1 guest';
     if (hiddenEl) hiddenEl.value = '1';
-    updateGuestInputs(1);
+    updateGuestInputs();
   } else if (tier === '2') {
     GUEST_TIER = 2;
     textEl.textContent = 'Your invitation is reserved for up to 2 guests';
     if (hiddenEl) hiddenEl.value = '2';
-    updateGuestInputs(2);
+    updateGuestInputs();
   } else if (tier === '3') {
     GUEST_TIER = 3;
     textEl.textContent = 'Your invitation is reserved for up to 3 guests';
     if (hiddenEl) hiddenEl.value = '3';
-    updateGuestInputs(3);
+    updateGuestInputs();
   } else {
     // unlimited or no param
     GUEST_TIER = null;
     textEl.textContent = 'How many guests will be joining you?';
     if (unlimEl) unlimEl.classList.remove('hidden');
     if (hiddenEl) hiddenEl.value = '1';
-    updateGuestInputs(1);
+    updateGuestInputs();
   }
 })();
 
@@ -351,7 +340,7 @@ function updateGuestInputs(count) {
     const next = Math.min(30, Math.max(1, (parseInt(guestInput.value) || 1) + delta));
     guestInput.value = next;
     if (hiddenGuest) hiddenGuest.value = next;
-    updateGuestInputs(next);
+    updateGuestInputs();
   }
   if (minusBtn) minusBtn.addEventListener('click', () => updateGuests(-1));
   if (plusBtn) plusBtn.addEventListener('click', () => updateGuests(+1));
@@ -395,8 +384,11 @@ function updateGuestInputs(count) {
     setLoading(true);
     responseDiv.classList.add('hidden');
 
+    const phone = (document.getElementById('rsvp-phone')?.value || '').trim();
+
     const payload = {
       name,
+      phone,
       attending: isAttending,
       guestCount: getGuestCount(),
       message: document.getElementById('rsvp-message').value.trim(),

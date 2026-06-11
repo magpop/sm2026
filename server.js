@@ -36,7 +36,7 @@ function writeRsvps(data) {
 // ─── POST /api/rsvp ─────────────────────────────────────────
 // Submit a new RSVP
 app.post('/api/rsvp', (req, res) => {
-  const { name, attending, guestCount, message } = req.body;
+  const { name, phone, attending, guestCount, message } = req.body;
 
   if (!name || typeof name !== 'string' || name.trim().length < 2) {
     return res.status(400).json({ error: 'Please provide a valid name.' });
@@ -55,6 +55,7 @@ app.post('/api/rsvp', (req, res) => {
   const entry = {
     id: existing ? existing.id : uuidv4(),
     name: name.trim(),
+    phone: phone ? phone.trim() : '',
     attending,
     guestCount: attending ? Math.max(1, parseInt(guestCount) || 1) : 0,
     message: message ? message.trim() : '',
