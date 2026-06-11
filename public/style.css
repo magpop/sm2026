@@ -983,53 +983,6 @@ button {
   transition: border-radius 0.3s;
 }
 
-.gallery-item::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border: 4px solid var(--gold);
-  border-radius: 12px;
-  transform: rotate(-4deg) scale(1.05);
-  z-index: 1;
-  pointer-events: none;
-  transition: all 0.35s var(--ease-out);
-}
-
-.gallery-item:nth-child(1)::after {
-  border-color: var(--gold-dark);
-  transform: rotate(3deg) scale(1.04) translate(6px, 6px);
-  border-radius: 20px 4px 20px 4px;
-}
-
-.gallery-item:nth-child(2)::after {
-  border-color: var(--sage);
-  transform: rotate(5deg) scale(1.02) translate(8px, -6px);
-  border-width: 6px;
-}
-
-.gallery-item:nth-child(3)::after {
-  border-color: var(--mauve);
-  transform: rotate(-6deg) scale(1.06) translate(-4px, 10px);
-  border-style: dashed;
-}
-
-.gallery-item:nth-child(4)::after {
-  border-color: var(--charcoal-mid);
-  transform: rotate(6deg) scale(1.03) translate(0, 8px);
-  border-radius: 5px 30px 5px 30px;
-}
-
-.gallery-item:nth-child(5)::after {
-  border-color: var(--sage-light);
-  transform: rotate(-5deg) scale(1.05) translate(-8px, -4px);
-  border-width: 5px;
-  border-style: dotted;
-}
-
-.gallery-item:nth-child(6)::after {
-  border-color: var(--gold);
-  transform: rotate(-4deg) scale(1.05);
-}
 
 .gallery-item:hover {
   transform: scale(1.05);
@@ -1040,11 +993,12 @@ button {
   box-shadow: 0 12px 40px rgba(44, 40, 40, 0.15);
 }
 
+/* 
 .gallery-item:hover::after {
   transform: rotate(0deg) scale(1) translate(0, 0);
   border-radius: 10px;
   border-width: 4px;
-}
+} */
 
 /* 2 big on top (span 3 of 6), 3 medium on bottom (span 2 of 6) */
 .gallery-item:nth-child(1),
@@ -1057,6 +1011,7 @@ button {
 .gallery-item:nth-child(5) {
   grid-column: span 2;
 }
+
 .gallery-hint {
   text-align: center;
   font-family: var(--font-display);
@@ -1605,9 +1560,6 @@ button {
     gap: 0.3rem;
   }
 
-  .countdown-sep {
-    display: none;
-  }
 }
 
 /* ── 17. Print styles ──────────────────────────────────────── */
