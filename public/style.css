@@ -229,6 +229,7 @@ button {
   z-index: 0;
 }
 
+/* trying again */
 .hero-section::after {
   content: '';
   position: absolute;
