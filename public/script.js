@@ -63,9 +63,9 @@ let GUEST_TIER = null;
     setTimeout(() => el.remove(), (dur + delay + 2) * 1000 * 2);
   }
 
-  // Stagger initial spawn
-  for (let i = 0; i < 10; i++) {
-    setTimeout(spawnPetal, i * 500);
+  // Stagger initial spawn — fast burst so petals are visible immediately
+  for (let i = 0; i < 22; i++) {
+    setTimeout(spawnPetal, i * 100);
   }
   setInterval(spawnPetal, 1800);
 })();
@@ -377,14 +377,18 @@ function updateGuestInputs() {
     }
 
     if (!name || name.length < 2) {
-      showResponse('Please enter guest name(s).', 'error');
+      showResponse('Please enter your name.', 'error');
+      return;
+    }
+
+    const phone = (document.getElementById('rsvp-phone')?.value || '').trim();
+    if (!phone || phone.length < 6) {
+      showResponse('Please enter your phone number.', 'error');
       return;
     }
 
     setLoading(true);
     responseDiv.classList.add('hidden');
-
-    const phone = (document.getElementById('rsvp-phone')?.value || '').trim();
 
     const payload = {
       name,
