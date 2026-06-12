@@ -28,7 +28,7 @@
   </button>
 
   <!-- Background audio — add your .mp3 file to public/ and update the src -->
-  <audio id="bg-music" loop preload="auto">
+  <audio id="bg-music" loop preload="none">
     <source src="music.mp3" type="audio/mpeg" />
   </audio>
 
@@ -242,8 +242,8 @@
   <!--  WEDDING GIFTS                                 -->
   <!-- ══════════════════════════════════════════════ -->
   <section id="gifts" class="gifts-section video-bg-section">
-    <video class="section-video-bg" autoplay loop muted playsinline>
-      <source src="vp.mp4" type="video/mp4" />
+    <video class="section-video-bg" loop muted playsinline id="gifts-video">
+      <source data-src="vp.mp4" type="video/mp4" />
     </video>
     <div class="video-overlay-dark"></div>
     <div class="gifts-container relative-content">
@@ -305,7 +305,7 @@
         <!-- Phone Number -->
         <div class="form-group">
           <label for="rsvp-phone" class="form-label">Phone Number *</label>
-          <input type="tel" id="rsvp-phone" name="phone" class="form-input" placeholder="+1 234 567 8900"
+          <input type="tel" id="rsvp-phone" name="phone" class="form-input" placeholder="+961 3 123 456"
             autocomplete="tel" required />
         </div>
 

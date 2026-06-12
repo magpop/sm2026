@@ -233,7 +233,7 @@ button {
   content: '';
   position: absolute;
   inset: 0;
-  background: url('hero-bg.png') center/cover no-repeat;
+  background: image-set(url('hero-bg.webp') type('image/webp'), url('hero-bg.png') type('image/png')) center/cover no-repeat;
   opacity: 0.35;
   z-index: 0;
 }
@@ -516,7 +516,7 @@ button {
   position: absolute;
   inset: 0;
   background:
-    url('hero-bg.png') center/cover no-repeat,
+    image-set(url('hero-bg.webp') type('image/webp'), url('hero-bg.png') type('image/png')) center/cover no-repeat,
     linear-gradient(135deg, #1a3a4a 0%, #0d2535 100%);
   opacity: 0.13;
 }

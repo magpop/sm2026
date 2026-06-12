@@ -461,3 +461,22 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     }
   });
 });
+
+// ─────────────────────────────────────────────────────────────
+// 11. LAZY-LOAD BACKGROUND VIDEO
+// ─────────────────────────────────────────────────────────────
+(function initLazyVideo() {
+  const video = document.getElementById('gifts-video');
+  if (!video) return;
+  const observer = new IntersectionObserver((entries) => {
+    if (!entries[0].isIntersecting) return;
+    const source = video.querySelector('source[data-src]');
+    if (source) {
+      source.src = source.dataset.src;
+      video.load();
+      video.play().catch(() => {});
+    }
+    observer.disconnect();
+  }, { rootMargin: '300px' });
+  observer.observe(video);
+})();
