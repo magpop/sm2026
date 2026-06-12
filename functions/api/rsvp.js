@@ -14,31 +14,39 @@ export async function onRequestPost(context) {
   if (typeof attending !== 'boolean')
     return Response.json({ error: 'Please indicate whether you are attending.' }, { status: 400 });
 
+  if (!env.DB)
+    return Response.json({ error: 'Database not configured. Please contact the site owner.' }, { status: 503 });
+
   const trimmedName = name.trim();
   const trimmedPhone = phone.trim();
   const gc = attending ? Math.max(1, parseInt(guestCount) || 1) : 0;
   const msg = message ? String(message).trim() : '';
   const timestamp = new Date().toISOString();
 
-  const existing = await env.DB.prepare(
-    'SELECT id FROM rsvps WHERE LOWER(name) = LOWER(?)'
-  ).bind(trimmedName).first();
+  try {
+    const existing = await env.DB.prepare(
+      'SELECT id FROM rsvps WHERE LOWER(name) = LOWER(?)'
+    ).bind(trimmedName).first();
 
-  const id = existing ? existing.id : crypto.randomUUID();
+    const id = existing ? existing.id : crypto.randomUUID();
 
-  if (existing) {
-    await env.DB.prepare(
-      'UPDATE rsvps SET name=?, phone=?, attending=?, guestCount=?, message=?, timestamp=?, updated=1 WHERE id=?'
-    ).bind(trimmedName, trimmedPhone, attending ? 1 : 0, gc, msg, timestamp, id).run();
-  } else {
-    await env.DB.prepare(
-      'INSERT INTO rsvps (id, name, phone, attending, guestCount, message, timestamp, updated) VALUES (?, ?, ?, ?, ?, ?, ?, 0)'
-    ).bind(id, trimmedName, trimmedPhone, attending ? 1 : 0, gc, msg, timestamp).run();
+    if (existing) {
+      await env.DB.prepare(
+        'UPDATE rsvps SET name=?, phone=?, attending=?, guestCount=?, message=?, timestamp=?, updated=1 WHERE id=?'
+      ).bind(trimmedName, trimmedPhone, attending ? 1 : 0, gc, msg, timestamp, id).run();
+    } else {
+      await env.DB.prepare(
+        'INSERT INTO rsvps (id, name, phone, attending, guestCount, message, timestamp, updated) VALUES (?, ?, ?, ?, ?, ?, ?, 0)'
+      ).bind(id, trimmedName, trimmedPhone, attending ? 1 : 0, gc, msg, timestamp).run();
+    }
+
+    return Response.json({
+      success: true,
+      updated: !!existing,
+      entry: { id, name: trimmedName, phone: trimmedPhone, attending, guestCount: gc, message: msg, timestamp, updated: !!existing }
+    });
+  } catch (err) {
+    console.error('DB error:', err);
+    return Response.json({ error: 'Unable to save your RSVP. Please try again later.' }, { status: 500 });
   }
-
-  return Response.json({
-    success: true,
-    updated: !!existing,
-    entry: { id, name: trimmedName, phone: trimmedPhone, attending, guestCount: gc, message: msg, timestamp, updated: !!existing }
-  });
 }

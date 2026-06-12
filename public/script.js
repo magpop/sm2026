@@ -355,7 +355,6 @@ function updateGuestInputs() {
     responseDiv.textContent = msg;
     responseDiv.className = `rsvp-response ${type}`;
     responseDiv.classList.remove('hidden');
-    responseDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
   function setLoading(on) {
@@ -367,6 +366,7 @@ function updateGuestInputs() {
   // ── Submit ────────────────────────────────────────────────
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    responseDiv.classList.add('hidden');
 
     const nameInputs = document.querySelectorAll('.guest-name-field');
     let name = '';
@@ -388,7 +388,6 @@ function updateGuestInputs() {
     }
 
     setLoading(true);
-    responseDiv.classList.add('hidden');
 
     const payload = {
       name,
