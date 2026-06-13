@@ -1494,9 +1494,10 @@ button {
 }
 
 .invite-card-img {
-  width: 100%;
-  max-width: 500px;
-  height: auto;
+  width: min(720px, 96vw);
+  max-width: none;
+  height: auto !important;
+  object-fit: unset !important;
   display: block;
   border-radius: 12px;
   box-shadow: 0 10px 40px rgba(26, 65, 74, 0.18);
