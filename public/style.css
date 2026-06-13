@@ -1481,8 +1481,8 @@ button {
 
 /* ── 16. Invitation Card ───────────────────────────────────── */
 .invite-card-section {
-  padding: var(--section-pad) 1rem;
-  background: var(--cream);
+  padding: 2.5rem 1rem var(--section-pad);
+  background: var(--cream-dark);
   text-align: center;
 }
 
@@ -1501,6 +1501,7 @@ button {
   display: block;
   border-radius: 12px;
   box-shadow: 0 10px 40px rgba(26, 65, 74, 0.18);
+  z-index: 40;
 }
 
 /* ── 17. Responsive ────────────────────────────────────────── */
