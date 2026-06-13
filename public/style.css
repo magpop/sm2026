@@ -1479,7 +1479,30 @@ button {
   display: none !important;
 }
 
-/* ── 16. Responsive ────────────────────────────────────────── */
+/* ── 16. Invitation Card ───────────────────────────────────── */
+.invite-card-section {
+  padding: var(--section-pad) 1rem;
+  background: var(--cream);
+  text-align: center;
+}
+
+.invite-card-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  padding: 0 0.5rem;
+}
+
+.invite-card-img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(26, 65, 74, 0.18);
+}
+
+/* ── 17. Responsive ────────────────────────────────────────── */
 @media (max-width: 768px) {
 
   /* Timeline → single column */

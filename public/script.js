@@ -466,7 +466,27 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ─────────────────────────────────────────────────────────────
-// 11. LAZY-LOAD BACKGROUND VIDEO
+// 11. INVITATION CARD — show correct image based on ?guests=
+// ─────────────────────────────────────────────────────────────
+(function initInviteCard() {
+  const params = new URLSearchParams(window.location.search);
+  const tier = (params.get('guests') || '').toLowerCase().trim();
+
+  let idx = 0; // unlimited / no param → invit0
+  if (tier === '1') idx = 1;
+  else if (tier === '2') idx = 2;
+  else if (tier === '3') idx = 3;
+
+  if (idx > 0) {
+    const def = document.getElementById('invite-img-0');
+    const target = document.getElementById('invite-img-' + idx);
+    if (def) def.classList.add('hidden');
+    if (target) target.classList.remove('hidden');
+  }
+})();
+
+// ─────────────────────────────────────────────────────────────
+// 12. LAZY-LOAD BACKGROUND VIDEO
 // ─────────────────────────────────────────────────────────────
 (function initLazyVideo() {
   const video = document.getElementById('gifts-video');
