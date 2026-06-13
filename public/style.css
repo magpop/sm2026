@@ -1491,10 +1491,10 @@ button {
 .invite-card-section::before {
   content: '';
   position: absolute;
-  top: 0;
+  top: -80px;
   left: 0;
   right: 0;
-  height: 220px;
+  height: 380px;
   background: linear-gradient(to bottom, #f8f5ed 0%, #ede8d5 100%);
   z-index: -1;
   pointer-events: none;
