@@ -728,7 +728,7 @@ button {
 
 /* ── 11. Event Details ─────────────────────────────────────── */
 .details-section {
-  padding: var(--section-pad) 1.5rem;
+  padding: var(--section-pad) 1.5rem 2rem;
   background: var(--cream);
 }
 
@@ -1495,9 +1495,7 @@ button {
   left: 0;
   right: 0;
   height: 220px;
-  background:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.10'/%3E%3C/svg%3E") 0 0 / 200px 200px,
-    linear-gradient(to bottom, #f8f5ed 0%, #ede8d5 100%);
+  background: linear-gradient(to bottom, #f8f5ed 0%, #ede8d5 100%);
   z-index: -1;
   pointer-events: none;
 }
